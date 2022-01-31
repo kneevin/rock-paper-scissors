@@ -2,6 +2,7 @@
 <html lang='en'>
 
 <head>
+    <meta charset='UTF-8'>
     <title>Rock Paper Scissors</title>
     <link rel='stylesheet' href='styles.css'>
     <script src='game.js'></script>
@@ -9,11 +10,24 @@
 </head>
 
 <body>
-    <div class='option-container'>
-        <img class='choice paper' src='icons/paper-img.png' alt='Paper'>
-        <img class='choice rock' src='icons/rock-img.png' alt='Rock'>
-        <img class='choice scissors' src='icons/scissors-img.png' alt='Scissors'>
-    </div>
+    <div class='main-container'>
+        <div class='option-container'>
+            <img class='choice paper' src='icons/paper-img.png' alt='Paper'>
+            <img class='choice rock' src='icons/rock-img.png' alt='Rock'>
+            <img class='choice scissors' src='icons/scissors-img.png' alt='Scissors'>
+        </div>
+        <div class='announcer'>You Lose! Rock beats Papers!</div>
+        <div class='scoring'>
+            <div class='card'>
+                <div class='title-card'>YOU</div>
+                <div class='player-score'>0</div>
+            </div>
+            <div class='card'>
+                <div class='title-card'>RNG</div>
+                <div class='computer-score'>0</div>
+            </div>
+        </div>
+
 </body>
 
 </html>
