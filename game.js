@@ -99,9 +99,9 @@ function playRound(playerSelection, computerSelection) {
 function announceWinner() {
     playerScore = document.querySelector('.player-score');
     if (parseInt(playerScore.textContent) == 5) {
-        setAnnouncement('You won the Tournament! Click any choice to begin a new match.')
+        setAnnouncement('You won the match! Click any choice to begin a new match.')
     } else {
-        setAnnouncement('You lost the Tournament. Click any choice to begin a new match.')
+        setAnnouncement('You lost the match. Click any choice to begin a new match.')
     }
 }
 
