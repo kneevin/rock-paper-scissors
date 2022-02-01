@@ -21,13 +21,22 @@ function capitalize(str) {
 }
 
 // announces to the player whether they lost, tied, or won
+// this now edits the text of the announcer
 function announce(playerSelection, computerSelection, outcome) {
+    announceElement = document.querySelector('.announcer');
     switch (outcome) {
-        case -1: return `You Lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}.`;
-        case 0: return `It's a Tie! You both chose ${playerSelection}...`;
-        case 1: return `You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
+        case -1:
+            announceElement.textContent = `You Lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}.`;
+            return;
+        case 0:
+            announceElement.textContent = `It's a Tie! You both chose ${playerSelection}...`;
+            return;
+        case 1:
+            announceElement.textContent = `You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
+            return;
     }
 }
+
 function playRound(playerSelection, computerSelection) {
     // the choices must be passed in all lowercases!
     // returns the following values:
@@ -57,30 +66,21 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// this is the game that is played when a button is pressed
+// in other words, when a choice is selected, the computer generates
+// a random choice, these are then compared and announces a winner
+function playGame() {
+    let playerChoose = this.id;
+    let computerChoose = computerChoice();
+    let outcome = playRound(playerChoose, computerChoose)
+    announce(playerChoose, computerChoose, outcome);
+}
 
 // plays a game of 5 rounds, returns the scores of the player, the computer, and how many ties there were
 function game() {
-    // initializations
-    let playerScore = 0;
-    let computerScore = 0;
-    let tieScore = 0;
-
-    // playing 5 rounds
-    for (let i = 0; i < 5; i++) {
-        // initializations for each round
-        let playerSelect = prompt('Enter you choice').toLowerCase();
-        let computerSelect = computerChoice();
-
-        // playing the round
-        let result = playRound(playerSelect, computerSelect);
-        console.log(announce(playerSelect, computerSelect, result));
-
-        // updating scores
-        if (result > 0) { playerScore++; }
-        else if (result < 0) { computerScore++; }
-        else { tieScore++; }
-    }
-
-    // announcing the scores
-    console.log(`Player: ${playerScore} | Computer: ${computerScore} | Ties: ${tieScore}`);
+    // creating button functionalities
+    let choices = document.querySelectorAll('.btn');
+    choices.forEach(choice => choice.addEventListener('click', playGame));
 }
+
+game()
