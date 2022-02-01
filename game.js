@@ -53,12 +53,12 @@ function announce(playerSelection, computerSelection, outcome, playerButton) {
             break;
         case 0:
             result = 'tie'
-            announcement = `It's a Tie! You both chose ${playerSelection}...`;
+            announcement = `It's a Tie! You both chose ${capitalize(playerSelection)}...`;
             updateScore('tie-score');
             break;
         case 1:
             result = 'win'
-            announcement = `You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
+            announcement = `You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}.`;
             updateScore('player-score');
             break;
     }
@@ -159,20 +159,24 @@ function setNightMode() {
     body = document.querySelector('body');
     body.classList.toggle('body-night');
 
-    // changing border color
-    buttons = document.querySelectorAll('.bordered')
+    // changing border color and card colors
+    buttons = document.querySelectorAll('.bordered');
     buttons.forEach((button) => {
         button.classList.toggle('border-night');
         button.classList.toggle('btn-night');
-        button.classList.toggle('btn-night:hover')
-    })
+    });
 
-    // changing background color of each button
-
+    // changing hover properties
+    hoverButtons = document.querySelectorAll('button');
+    console.log(hoverButtons)
+    hoverButtons.forEach((button) => {
+        console.log(button);
+        button.classList.toggle('night');
+    });
 }
 // night-mode functionality
 function addNightMode() {
-    let nightButton = document.querySelector('.night-mode');
+    let nightButton = document.querySelector('.night-btn');
     nightButton.addEventListener('click', setNightMode)
 }
 

@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: #E9DAC1;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -36,13 +36,14 @@ body {
 
 .btn {
     background-color: white;
-    transition: 0.1s;
 }
 
-.btn:hover {
+.btn:hover,
+.night-btn:hover {
     background-color: #c7c7c7;
     border: 5px solid black;
     box-shadow: 14px 14px grey;
+    transition: 0.1s;
 }
 
 /* styling for choice outcome */
@@ -114,8 +115,9 @@ body {
     box-shadow: 7px 7px #A5E1AD;
 }
 
-.btn-night:hover {
+.night:hover {
     border: 5px solid #7C83FD;
-    background-color: #88FFF7;
+    background-color: #c1deae;
     box-shadow: 14px 14px #A5E1AD;
+    transition: 0.1s;
 }
