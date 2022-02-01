@@ -153,4 +153,28 @@ function game() {
     choices.forEach(choice => choice.addEventListener('click', playGame));
 }
 
-game()
+// turns everything to 'night-mode'
+function setNightMode() {
+    // setting screen to black
+    body = document.querySelector('body');
+    body.classList.toggle('body-night');
+
+    // changing border color
+    buttons = document.querySelectorAll('.bordered')
+    buttons.forEach((button) => {
+        button.classList.toggle('border-night');
+        button.classList.toggle('btn-night');
+        button.classList.toggle('btn-night:hover')
+    })
+
+    // changing background color of each button
+
+}
+// night-mode functionality
+function addNightMode() {
+    let nightButton = document.querySelector('.night-mode');
+    nightButton.addEventListener('click', setNightMode)
+}
+
+addNightMode();
+game();

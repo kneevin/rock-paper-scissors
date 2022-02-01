@@ -1,4 +1,5 @@
 body {
+    background-color: white;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -57,8 +58,10 @@ body {
     background-color: #6782c7 !important;
 }
 
-/* styling for the status */
+/* styling for the announcement */
+
 .announcer {
+    background-color: white;
     width: 30vw;
     padding: 10px 20px;
     font-family: "Courier";
@@ -70,8 +73,8 @@ body {
     text-align: center;
 }
 
-/* styling for the scoring cards */
 .card {
+    background-color: white;
     height: 150px;
     width: 150px;
     display: flex;
@@ -98,4 +101,21 @@ body {
     width: 100%;
     justify-content: center;
     gap: 20px;
+}
+
+/* night mode styling */
+.body-night {
+    background-color: black;
+}
+
+.btn-night {
+    background-color: #88FFF7;
+    border-color: #7C83FD;
+    box-shadow: 7px 7px #A5E1AD;
+}
+
+.btn-night:hover {
+    border: 5px solid #7C83FD;
+    background-color: #88FFF7;
+    box-shadow: 14px 14px #A5E1AD;
 }
