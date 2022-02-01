@@ -36,6 +36,7 @@ function updateScore(winner) {
     value.textContent = `${parseInt(value.textContent) + 1}`
 }
 
+// changes announcement text to the passed parameter
 function setAnnouncement(str) {
     let announceElement = document.querySelector('.announcer')
     announceElement.textContent = str;
@@ -47,20 +48,21 @@ function announce(playerSelection, computerSelection, outcome, playerButton) {
     switch (outcome) {
         case -1: // computer won, need to update computer score
             result = 'lose'
-            setAnnouncement(`You Lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}.`)
+            announcement = `You Lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}.`;
             updateScore('computer-score');
             break;
         case 0:
             result = 'tie'
-            setAnnouncement(`It's a Tie! You both chose ${playerSelection}...`);
+            announcement = `It's a Tie! You both chose ${playerSelection}...`;
             updateScore('tie-score');
             break;
         case 1:
             result = 'win'
-            setAnnouncement(`You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`);
+            announcement = `You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
             updateScore('player-score');
             break;
     }
+    setAnnouncement(announcement);
     setOutcomeColor(playerButton, result);
 }
 
@@ -93,21 +95,40 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// reseting the game will announce the winner and set all scores to zero
-function resetGame() {
+// if a competitor reaches a score of 5, announces a winner
+function announceWinner() {
     playerScore = document.querySelector('.player-score');
-    if (parseInt(playerScore.textContent) >= 5) {
+    if (parseInt(playerScore.textContent) == 5) {
         setAnnouncement('You won the Tournament! Click any choice to begin a new match.')
+    } else {
+        setAnnouncement('You lost the Tournament. Click any choice to begin a new match.')
     }
+}
+
+// helper function that resets score the match once clicked
+function resetScore() {
+    let scores = document.querySelectorAll('.score');
+    scores.forEach((score) => { score.textContent = '0' });
+    game();
+}
+
+// this function will remove the eventlistener for the current match,
+// then add an eventlistener that will reset the scores of the match once clicked
+// after it is clicked, it will add the playgame eventlisteners again
+function resetGame() {
+    let choices = document.querySelectorAll('.btn');
+    choices.forEach(choice => choice.removeEventListener('click', playGame));
+    choices.forEach(choice => choice.addEventListener('click', resetScore))
 }
 
 
 // this function checks whether the game is over
-// if it is, it will call another function that will announce the winner, and reset the values
+// if it is, it will call another function that will announce the winner
 function checkWinner() {
-    scores = document.querySelectorAll('.score');
+    scores = document.querySelectorAll('.competitor');
     scores.forEach(score => {
-        if (parseInt(score.textContent) >= 5) { // if a score is above 5, announce the winner and reset the game
+        if (parseInt(score.textContent) == 5) { // if a score is above 5, announce the winner and reset the game
+            announceWinner();
             resetGame();
         }
     })
@@ -128,6 +149,7 @@ function playGame() {
 function game() {
     // creating button functionalities
     let choices = document.querySelectorAll('.btn');
+    choices.forEach(choice => choice.removeEventListener('click', resetScore));
     choices.forEach(choice => choice.addEventListener('click', playGame));
 }
 
