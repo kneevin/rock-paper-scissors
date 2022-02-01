@@ -30,24 +30,35 @@ function setOutcomeColor(playerButton, result) {
 
 }
 
+// updates the score of the winner, increments by one
+function updateScore(winner) {
+    value = document.querySelector(`.${winner}`);
+    value.textContent = `${parseInt(value.textContent) + 1}`
+}
+
+function setAnnouncement(str) {
+    let announceElement = document.querySelector('.announcer')
+    announceElement.textContent = str;
+}
+
 // announces to the player whether they lost, tied, or won
 // this now edits the text of the announcer
-// additionally, it sets the color of the outcome to the player's choice
-// #00ff00 = win, #de0d0d = lose, #6782c7 = tie
 function announce(playerSelection, computerSelection, outcome, playerButton) {
-    let announceElement = document.querySelector('.announcer');
     switch (outcome) {
-        case -1:
+        case -1: // computer won, need to update computer score
             result = 'lose'
-            announceElement.textContent = `You Lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}.`;
+            setAnnouncement(`You Lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}.`)
+            updateScore('computer-score');
             break;
         case 0:
             result = 'tie'
-            announceElement.textContent = `It's a Tie! You both chose ${playerSelection}...`;
+            setAnnouncement(`It's a Tie! You both chose ${playerSelection}...`);
+            updateScore('tie-score');
             break;
         case 1:
             result = 'win'
-            announceElement.textContent = `You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
+            setAnnouncement(`You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`);
+            updateScore('player-score');
             break;
     }
     setOutcomeColor(playerButton, result);
@@ -82,6 +93,26 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// reseting the game will announce the winner and set all scores to zero
+function resetGame() {
+    playerScore = document.querySelector('.player-score');
+    if (parseInt(playerScore.textContent) >= 5) {
+        setAnnouncement('You won the Tournament! Click any choice to begin a new match.')
+    }
+}
+
+
+// this function checks whether the game is over
+// if it is, it will call another function that will announce the winner, and reset the values
+function checkWinner() {
+    scores = document.querySelectorAll('.score');
+    scores.forEach(score => {
+        if (parseInt(score.textContent) >= 5) { // if a score is above 5, announce the winner and reset the game
+            resetGame();
+        }
+    })
+}
+
 // this is the game that is played when a button is pressed
 // in other words, when a choice is selected, the computer generates
 // a random choice, these are then compared and announces a winner
@@ -90,6 +121,7 @@ function playGame() {
     let computerChoose = computerChoice();
     let outcome = playRound(playerChoose, computerChoose)
     announce(playerChoose, computerChoose, outcome, this);
+    checkWinner();
 }
 
 // plays a game of 5 rounds, returns the scores of the player, the computer, and how many ties there were

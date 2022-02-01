@@ -35,7 +35,7 @@ body {
 
 .btn {
     background-color: white;
-    transition: 0.25s;
+    transition: 0.1s;
 }
 
 .btn:hover {
@@ -67,6 +67,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 /* styling for the scoring cards */
@@ -86,7 +87,8 @@ body {
 }
 
 .player-score,
-.computer-score {
+.computer-score,
+.tie-score {
     font-family: 'Courier New';
     font-size: 90px;
 }
