@@ -35,25 +35,26 @@ body {
 
 .btn {
     background-color: white;
+    transition: 0.25s;
 }
 
 .btn:hover {
-    background-color: #d6d2c7;
+    background-color: #c7c7c7;
     border: 5px solid black;
     box-shadow: 14px 14px grey;
 }
 
-/* these classes will be assigned to a button depending on outcome of player */
-.win:active {
-    background-color: #00ff00;
+/* styling for choice outcome */
+.win {
+    background-color: #00ff00 !important;
 }
 
-.lose:active {
-    background-color: #de0d0d;
+.lose {
+    background-color: #de0d0d !important;
 }
 
-.tie:active {
-    background-color: #6782c7;
+.tie {
+    background-color: #6782c7 !important;
 }
 
 /* styling for the status */

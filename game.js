@@ -20,21 +20,37 @@ function capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
 }
 
+// sets the color of the player's choice to the color of their outcome
+// then removes that color
+function setOutcomeColor(playerButton, result) {
+    let userChoice = document.querySelector(`#${playerButton.id}`, 'btn')
+    // the choice 'blinks'
+    userChoice.classList.add(result);
+    setTimeout(() => { userChoice.classList.remove(result) }, 300);
+
+}
+
 // announces to the player whether they lost, tied, or won
 // this now edits the text of the announcer
-function announce(playerSelection, computerSelection, outcome) {
-    announceElement = document.querySelector('.announcer');
+// additionally, it sets the color of the outcome to the player's choice
+// #00ff00 = win, #de0d0d = lose, #6782c7 = tie
+function announce(playerSelection, computerSelection, outcome, playerButton) {
+    let announceElement = document.querySelector('.announcer');
     switch (outcome) {
         case -1:
+            result = 'lose'
             announceElement.textContent = `You Lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}.`;
-            return;
+            break;
         case 0:
+            result = 'tie'
             announceElement.textContent = `It's a Tie! You both chose ${playerSelection}...`;
-            return;
+            break;
         case 1:
+            result = 'win'
             announceElement.textContent = `You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
-            return;
+            break;
     }
+    setOutcomeColor(playerButton, result);
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -73,7 +89,7 @@ function playGame() {
     let playerChoose = this.id;
     let computerChoose = computerChoice();
     let outcome = playRound(playerChoose, computerChoose)
-    announce(playerChoose, computerChoose, outcome);
+    announce(playerChoose, computerChoose, outcome, this);
 }
 
 // plays a game of 5 rounds, returns the scores of the player, the computer, and how many ties there were
