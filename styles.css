@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+/* aligning containers */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3%;
+}
+
+/* border styling for all cards */
+.bordered {
+    border: 3px solid black;
+    box-shadow: 7px 7px grey;
+}
+
+/* styling for the choices */
+.option-container {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.choice {
+    padding: 10px;
+}
+
+/* styling for the status */
+.announcer {
+    width: 35vw;
+    padding: 10px 20px;
+    font-family: "Courier";
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* styling for the scoring cards */
+.card {
+    height: 150px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-card {
+    font-family: 'Courier New';
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.player-score,
+.computer-score {
+    font-family: 'Courier New';
+    font-size: 90px;
+}
+
+.scoring {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+}
