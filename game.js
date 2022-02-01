@@ -170,7 +170,6 @@ function setNightMode() {
     hoverButtons = document.querySelectorAll('button');
     console.log(hoverButtons)
     hoverButtons.forEach((button) => {
-        console.log(button);
         button.classList.toggle('night');
     });
 }
